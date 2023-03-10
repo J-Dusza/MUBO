@@ -22,7 +22,7 @@ const Navbar = (props: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState(false);
 
   return (
-    <nav className="w-full bg-background text-secondary py-5 px-5 text-xl">
+    <nav className="w-full bg-background bg-opacity-75 text-secondary py-5 px-5 text-xl absolute top-0 z-40">
       {/* CONTENT */}
       <div className="flex justify-between items-center">
         {/* MOBILE MENU ICON */}

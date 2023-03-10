@@ -8,7 +8,7 @@ type Props = {
 
 const MobileMenu = ({ onClick, navLinks }: Props) => (
   <div
-    className=" w-full h-full fixed left-0 top-0 bg-black z-40 flex flex-col text-highlight2
+    className=" w-[1/3] h-full fixed left-0 top-0 bg-black z-40 flex flex-col text-highlight2
    font-bold"
   >
     <button onClick={onClick} className="m-7 self-end text-white">

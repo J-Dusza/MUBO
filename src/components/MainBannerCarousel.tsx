@@ -1,60 +1,45 @@
 import React from "react";
-import Cali from "/images/California-carousel.png";
-
+import Image from "next/image";
 type Props = {};
 
 const MainBannerCarousel = (props: Props) => {
   return (
     <div className="carousel w-full">
-      <div id="slide1" className="carousel-item relative w-full">
-        <img src="/images/California-carousel.png" className="w-full" />
+      <div id="slide1" className="carousel-item relative w-full h-screen">
+        <Image
+          fill
+          alt="california"
+          src="/california.jpg"
+          className="w-full object-cover"
+        />
+        <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 top-3/4 space-x-7 uppercase text-5xl">
+          California
+        </div>
+        <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 top-3/4 space-x-7 uppercase text-5xl">
+          <button className="btn btn-accent text-xl">Lookbook</button>
+          <button className="btn btn-accent text-xl">Kolekcja</button>
+        </div>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="#slide4" className="btn btn-circle">
+          <a href="#slide2" className="btn glass btn-circle">
             ❮
           </a>
-          <a href="#slide2" className="btn btn-circle">
+          <a href="#slide2" className="btn glass btn-circle">
             ❯
           </a>
         </div>
       </div>
-      <div id="slide2" className="carousel-item relative w-full">
-        <img
-          src="/images/stock/photo-1609621838510-5ad474b7d25d.jpg"
-          className="w-full"
+      <div id="slide2" className="carousel-item relative w-full h-screen">
+        <Image
+          fill
+          alt="california"
+          src="/sky.jpg"
+          className="w-full object-cover"
         />
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="#slide1" className="btn btn-circle">
+          <a href="#slide1" className="btn glass btn-circle">
             ❮
           </a>
-          <a href="#slide3" className="btn btn-circle">
-            ❯
-          </a>
-        </div>
-      </div>
-      <div id="slide3" className="carousel-item relative w-full">
-        <img
-          src="/images/stock/photo-1414694762283-acccc27bca85.jpg"
-          className="w-full"
-        />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="#slide2" className="btn btn-circle">
-            ❮
-          </a>
-          <a href="#slide4" className="btn btn-circle">
-            ❯
-          </a>
-        </div>
-      </div>
-      <div id="slide4" className="carousel-item relative w-full">
-        <img
-          src="/images/stock/photo-1665553365602-b2fb8e5d1707.jpg"
-          className="w-full"
-        />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="#slide3" className="btn btn-circle">
-            ❮
-          </a>
-          <a href="#slide1" className="btn btn-circle">
+          <a href="#slide1" className="btn glass btn-circle">
             ❯
           </a>
         </div>
@@ -62,5 +47,16 @@ const MainBannerCarousel = (props: Props) => {
     </div>
   );
 };
+
+// type btnProps = {
+//   href: string;
+//   children: React.ReactNode;
+// };
+
+// const nextButton = ({ children, href }: btnProps) => (
+//   <a href={href} className="btn">
+//     {children}
+//   </a>
+// );
 
 export default MainBannerCarousel;

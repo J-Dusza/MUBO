@@ -26,12 +26,22 @@ module.exports = {
   plugins: [require("daisyui")],
   daisyui: {
     styled: true,
-    themes: false,
+    themes: true,
     base: true,
     utils: true,
     logs: true,
     rtl: false,
     prefix: "",
-    darkTheme: "dark",
+    darkTheme: false,
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/colors/themes")["[data-theme=corporate]"],
+          primary: "#48BF84",
+          accent: "#ffffff",
+          "primary-focus": "#439775",
+        },
+      },
+    ],
   },
 };
