@@ -22,13 +22,13 @@ const Navbar = (props: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState(false);
 
   return (
-    <nav className="w-full bg-primary text-white py-5 px-5 text-xl">
+    <nav className="w-full bg-background text-secondary py-5 px-5 text-xl">
       {/* CONTENT */}
       <div className="flex justify-between items-center">
         {/* MOBILE MENU ICON */}
         <button
           onClick={() => setIsMenuToggled(!isMenuToggled)}
-          className="lg:hidden"
+          className="lg:hidden p-2 border-[2px] hover:bg-toxic-200 hover:text-black hover:border-black transition-all duration-250 ease-in-out border-toxic-200 text-toxic-200"
         >
           <HamburgerIcon />
         </button>
@@ -41,7 +41,7 @@ const Navbar = (props: Props) => {
         {/* LEFT */}
         <div className="flex items-center px-5 space-x-5">
           <Logo />
-          <div className=" text-zinc-300 space-x-7 uppercase px-5 hidden lg:block">
+          <div className=" space-x-7 uppercase px-5 hidden lg:block">
             {NavLinkArray.map((link, index) => (
               <NavLink key={index} link={link} mobile={false} />
             ))}
@@ -49,7 +49,9 @@ const Navbar = (props: Props) => {
         </div>
         {/* RIGHT */}
         <div className="flex space-x-5">
-          <User />
+          <div className="">
+            <User />
+          </div>
           <ShoppingBag />
         </div>
       </div>

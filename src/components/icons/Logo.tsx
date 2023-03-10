@@ -4,7 +4,7 @@ import Link from "next/link";
 type Props = { style?: string };
 
 const Logo = ({ style }: Props) => (
-  <Link href="/" className={`font-logo text-5xl px-5 text-secondary ${style}`}>
+  <Link href="/" className={`font-logo text-5xl px-5 text-primary ${style}`}>
     MUNO
   </Link>
 );

@@ -3,7 +3,7 @@ import NavLink from "./NavLink";
 
 type Props = {
   onClick: React.Dispatch<React.SetStateAction<any>>;
-  navLinks: Array;
+  navLinks: Array<string>;
 };
 
 const MobileMenu = ({ onClick, navLinks }: Props) => (

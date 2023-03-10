@@ -1,7 +1,7 @@
 export enum NavLinkType {
-  New = "new arrivals",
-  Collections = "collections",
-  Men = "men",
-  Women = "women",
-  Sale = "sale",
+  new = "new arrivals",
+  collections = "collections",
+  men = "men",
+  women = "women",
+  sale = "sale",
 }

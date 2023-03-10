@@ -11,11 +11,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#003844",
-        secondary: "#CEB5A7",
-        background: "#F5EFED",
-        highlight1: "#A9714B",
-        highlight2: "#006C67",
+        primary: "#48BF84",
+        secondary: "#C5D1Ev",
+        background: "#E4DFDA",
+        "toxic-100": "#61D095",
+        "toxic-200": "#48BF84",
+        "toxic-300": "#439775",
+        "toxic-400": "#2A4747",
+        highlight2: "#439775",
         customViolet: "#91A6FF",
       },
     },
