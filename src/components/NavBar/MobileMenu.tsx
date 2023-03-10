@@ -15,8 +15,8 @@ const MobileMenu = ({ onClick, navLinks }: Props) => (
       <XIcon />
     </button>
     <div className=" flex flex-col px-10 items-start text-2xl space-y-2">
-      {navLinks.map((link) => (
-        <NavLink link={link} mobile={true} />
+      {navLinks.map((link, index) => (
+        <NavLink key={index} link={link} mobile={true} />
       ))}
     </div>
   </div>

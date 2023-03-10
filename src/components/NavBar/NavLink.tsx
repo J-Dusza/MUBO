@@ -3,6 +3,7 @@ import Link from "next/link";
 import { NavLinkType } from "@/shared/types";
 
 type Props = {
+  key: number;
   link: string;
   mobile: bool;
 };

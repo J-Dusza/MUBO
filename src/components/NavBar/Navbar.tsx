@@ -42,8 +42,8 @@ const Navbar = (props: Props) => {
         <div className="flex items-center px-5 space-x-5">
           <Logo />
           <div className=" text-zinc-300 space-x-7 uppercase px-5 hidden lg:block">
-            {NavLinkArray.map((link) => (
-              <NavLink link={link} mobile={false} />
+            {NavLinkArray.map((link, index) => (
+              <NavLink key={index} link={link} mobile={false} />
             ))}
           </div>
         </div>
