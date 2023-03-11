@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Slide from "./Slide";
 type Props = {};
 
 const MainBannerCarousel = (props: Props) => {
