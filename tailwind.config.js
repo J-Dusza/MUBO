@@ -13,7 +13,7 @@ module.exports = {
       colors: {
         primary: "#48BF84",
         secondary: "#C5D1Ev",
-        background: "#E4DFDA",
+        background: "#C4B1AE",
         "toxic-100": "#61D095",
         "toxic-200": "#48BF84",
         "toxic-300": "#439775",
@@ -37,9 +37,9 @@ module.exports = {
       {
         light: {
           ...require("daisyui/src/colors/themes")["[data-theme=corporate]"],
-          primary: "#48BF84",
+          primary: "#000",
           accent: "#ffffff",
-          "primary-focus": "#439775",
+          "primary-focus": "#48BF84",
         },
       },
     ],
