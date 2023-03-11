@@ -5,10 +5,9 @@ import { NavLinkType } from "@/shared/types";
 type Props = {
   key: number;
   link: string;
-  mobile: bool;
 };
 
-const NavLink = ({ link, mobile }: Props) => {
+const NavLink = ({ link }: Props) => {
   const display = NavLinkType[link];
   return (
     <Link

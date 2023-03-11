@@ -60,7 +60,7 @@ const Navbar = (props: Props) => {
           <Logo />
           <div className=" space-x-7 uppercase px-5 hidden lg:block text-black font-semibold">
             {NavLinkArray.map((link, index) => (
-              <NavLink key={index} link={link} mobile={false} />
+              <NavLink key={index} link={link} />
             ))}
           </div>
         </div>
