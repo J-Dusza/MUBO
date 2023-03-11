@@ -11,11 +11,9 @@ import { useMediaQuery } from "@mui/material";
 import HamburgerIcon from "../icons/HamburgerIcon";
 import NavLink from "./NavLink";
 import { NavLinkType } from "@/shared/types";
-import MobileMenu from "./MobileMenu";
 import { useEffect } from "react";
 
 type Props = {};
-const NavLinkArray = Object.keys(NavLinkType);
 
 const Navbar = (props: Props) => {
   const isAboveLargeScreen = useMediaQuery("(min-width: 1024px)");
@@ -49,19 +47,15 @@ const Navbar = (props: Props) => {
         >
           <HamburgerIcon />
         </button>
-        {isMenuToggled && !isAboveLargeScreen && (
-          <MobileMenu
-            navLinks={NavLinkArray}
-            onClick={() => setIsMenuToggled((state) => !state)}
-          />
-        )}
         {/* LEFT */}
         <div className="flex items-center px-5 space-x-5">
           <Logo />
           <div className=" space-x-7 uppercase px-5 hidden lg:block text-black font-semibold">
-            {NavLinkArray.map((link, index) => (
-              <NavLink key={index} link={link} />
-            ))}
+            <NavLink link="/new" display="new arrivals" />
+            <NavLink link="/collections" display="collections" />
+            <NavLink link="/men" display="men" />
+            <NavLink link="/women" display="women" />
+            <NavLink link="/sale" display="sale" />
           </div>
         </div>
         {/* RIGHT */}

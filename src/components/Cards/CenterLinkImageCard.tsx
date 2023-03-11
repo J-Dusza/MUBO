@@ -1,5 +1,4 @@
 import React from "react";
-import StandardButton from "../StandardButton";
 
 type Props = {
   className?: string;
