@@ -16,7 +16,7 @@ const MobileMenu = ({ onClick, navLinks }: Props) => (
     </button>
     <div className=" flex flex-col px-10 items-start text-2xl space-y-2">
       {navLinks.map((link, index) => (
-        <NavLink key={index} link={link} mobile={true} />
+        <NavLink key={index} link={link} />
       ))}
     </div>
   </div>
