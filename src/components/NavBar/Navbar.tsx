@@ -21,7 +21,6 @@ const Navbar = (props: Props) => {
   const isAboveLargeScreen = useMediaQuery("(min-width: 1024px)");
   const [isMenuToggled, setIsMenuToggled] = useState(false);
   const [isAccountTabOn, setIsAccountTabOn] = useState(false);
-
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
 
   useEffect(() => {
@@ -38,8 +37,8 @@ const Navbar = (props: Props) => {
   return (
     <nav>
       <div
-        className={`w-full text-secondary py-5 px-5 text-xl z-40 fixed top-0 ${
-          !isTopOfPage && "bg-zinc-100"
+        className={`w-full text-secondary py-5 px-5 text-xl z-40 absolute top-0${
+          !isTopOfPage ? "bg-zinc-100" : "bg-none"
         } transition-colors duration-300 ease-in-out`}
       >
         {/* CONTENT */}
@@ -70,14 +69,18 @@ const Navbar = (props: Props) => {
               onMouseEnter={() => setIsAccountTabOn(true)}
               onMouseLeave={() => setIsAccountTabOn(false)}
             >
-              <Link href="/">
-                <User
-                  className={`hover:fill-toxic-200 hover:scale-125 ${
-                    isAccountTabOn && "fill-toxic-200 scale-125"
-                  }`}
-                />
-              </Link>
-              {isAccountTabOn && isAboveLargeScreen && <AccountTab />}
+              <div onClick={() => setIsAccountTabOn(false)}>
+                <Link href="/login">
+                  <User
+                    className={`hover:fill-toxic-200 hover:scale-125 ${
+                      isAccountTabOn && "fill-toxic-200 scale-125"
+                    }`}
+                  />
+                </Link>
+              </div>
+              {isAccountTabOn &&
+                isAboveLargeScreen &&
+                window.location.pathname !== "/login" && <AccountTab />}
             </div>
             <ShoppingBag />
           </div>
