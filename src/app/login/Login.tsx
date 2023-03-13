@@ -6,7 +6,7 @@ type Props = {};
 
 const Login = (props: Props) => {
   return (
-    <div className="lg:w-1/2 lg:p-20 pb-32 pt-96 bg-white space-y-7 flex flex-col items-center">
+    <div className="lg:w-1/2 lg:p-20 py-32 bg-white space-y-7 flex flex-col items-center">
       <h2 className="py-8 font-semibold text-4xl uppercase text-center">
         login
       </h2>

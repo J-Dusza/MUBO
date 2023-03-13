@@ -21,8 +21,8 @@ const theme = createTheme({
 const page = (props: Props) => {
   return (
     <ThemeProvider theme={theme}>
-      <div className="relative top-[90px]">
-        <div className=" h-screen w-full flex flex-col lg:flex-row justify-center">
+      <div className="md:relative top-[90px]">
+        <div className="w-full flex flex-col lg:flex-row justify-center">
           {/* LEFT SIDE */}
 
           <Login />
@@ -43,7 +43,7 @@ const page = (props: Props) => {
                 variant="standard"
                 className="w-full caret-toxic-200"
               />
-              <div className="flex flex-row gap-8 w-full">
+              <div className="flex flex-col md:flex-row gap-8 w-full">
                 <TextField
                   required
                   focused
