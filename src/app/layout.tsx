@@ -1,7 +1,6 @@
 import "./globals.css";
 import Link from "next/link";
 import Navbar from "@/components/NavBar/Navbar";
-import { useState } from "react";
 
 export const metadata = {
   title: "Create Next App",

@@ -12,6 +12,8 @@ import HamburgerIcon from "../icons/HamburgerIcon";
 import NavLink from "./NavLink";
 import { NavLinkType } from "@/shared/types";
 import { useEffect } from "react";
+import XIcon from "../icons/XIcon";
+import { stat } from "fs";
 
 type Props = {};
 
@@ -35,18 +37,51 @@ const Navbar = (props: Props) => {
   return (
     <nav
       className={`w-full text-secondary py-5 px-5 text-xl z-40 fixed top-0 ${
-        !isTopOfPage && "bg-white"
+        !isTopOfPage && "bg-zinc-100"
       } transition-colors duration-300 ease-in-out`}
     >
       {/* CONTENT */}
       <div className="flex justify-between items-center">
-        {/* MOBILE MENU ICON */}
+        {/* MOBILE MENU */}
+        {/* {isMenuToggled && !isAboveLargeScreen && ( */}
+        <div>
+          <div
+            className={` w-3/4 h-full fixed left-0 top-0 bg-black z-50 flex flex-col text-highlight font-bold transition duration-500 ease-out ${
+              isMenuToggled ? "translate-x-0" : "-translate-x-full"
+            }`}
+          >
+            <button
+              onClick={() => setIsMenuToggled((state) => !state)}
+              className="m-7 self-end text-zinc-300"
+            >
+              <XIcon />
+            </button>
+            <div className=" flex flex-col px-10 items-start text-2xl space-y-2 text-zinc-300">
+              <NavLink link="/new" display="new arrivals" />
+              <NavLink link="/collections" display="collections" />
+              <NavLink link="/men" display="men" />
+              <NavLink link="/women" display="women" />
+              <NavLink link="/sale" display="sale" />
+            </div>
+          </div>
+          <button
+            onClick={() => setIsMenuToggled((state) => !state)}
+            className={`absolute top-0 w-screen h-screen z-30 bg-gray-900 transition-all duration-300 ${
+              isMenuToggled ? "opacity-50" : "opacity-0 hidden"
+            }`}
+          ></button>
+        </div>
+        {/* )} */}
+
+        {/* MOBILE BUTTON */}
         <button
-          onClick={() => setIsMenuToggled(!isMenuToggled)}
-          className="lg:hidden p-2 border-[2px] hover:bg-toxic-200 text-black border-black transition-all duration-300 ease-in-out "
+          onClick={() => setIsMenuToggled((state) => !state)}
+          className="lg:hidden p-2 border-[2px] hover:bg-toxic-200 text-black border-black transition-all duration-300 ease-in-out"
         >
           <HamburgerIcon />
         </button>
+        {/* MOBILE CONTENT */}
+
         {/* LEFT */}
         <div className="flex items-center px-5 space-x-5">
           <Logo />
