@@ -1,11 +1,15 @@
-const User = () => (
+type Props = {
+  className?: string;
+};
+
+const User = ({ className }: Props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="w-6 h-6 hover:fill-toxic-200 hover:scale-125 transition-all ease-in-out duration-150"
+    className={`w-6 h-6 transition-all ease-in-out duration-150 ${className}`}
   >
     <path
       strokeLinecap="round"
