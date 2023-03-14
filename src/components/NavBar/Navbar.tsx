@@ -37,7 +37,7 @@ const Navbar = (props: Props) => {
   return (
     <nav>
       <div
-        className={`w-full text-secondary py-5 px-5 text-xl z-40 absolute top-0${
+        className={`w-full text-secondary py-5 px-5 text-xl z-40 fixed top-0 ${
           !isTopOfPage ? "bg-zinc-100" : "bg-none"
         } transition-colors duration-300 ease-in-out`}
       >

@@ -1,5 +1,4 @@
 import MainBannerCarousel from "@/components/Carousel/MainBannerCarousel";
-import Image from "next/image";
 import CenterLinkImageCard from "@/components/Cards/CenterLinkImageCard";
 
 const Home = () => {
