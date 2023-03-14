@@ -4,7 +4,9 @@ import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import Google from "../icons/Google";
 import Link from "next/link";
 
-type Props = {};
+type Props = {
+  setIsAccountTabOn: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const theme = createTheme({
   palette: {
@@ -17,7 +19,7 @@ const theme = createTheme({
   },
 });
 
-const AccountTab = (props: Props) => {
+const AccountTab = ({ setIsAccountTabOn }: Props) => {
   return (
     <ThemeProvider theme={theme}>
       <div className="absolute top-12 right-0 w-80 h-[550px]">
@@ -41,7 +43,10 @@ const AccountTab = (props: Props) => {
           </button>
           <p className="uppercase text-center py-5 text-sm">⎯⎯⎯⎯ or ⎯⎯⎯⎯</p>
           <Link href="/login">
-            <button className="btn btn-wide btn-success">
+            <button
+              className="btn btn-wide btn-success"
+              onClick={() => setIsAccountTabOn(false)}
+            >
               Create an account
             </button>
           </Link>

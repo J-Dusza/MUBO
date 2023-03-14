@@ -1,8 +1,21 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import Image from "next/image";
+import { useAtom } from "jotai";
+import { isNavBackgroundOn } from "@/shared/global";
 type Props = {};
 
 const MainBannerCarousel = (props: Props) => {
+  const [isBackgroundOn, setisBackgroundOn] = useAtom(isNavBackgroundOn);
+
+  useEffect(() => {
+    setisBackgroundOn(false);
+
+    return () => {
+      setisBackgroundOn(true);
+    };
+  }, []);
+
   return (
     <div className="carousel w-full">
       <div id="slide1" className="carousel-item relative w-full h-screen">
@@ -18,10 +31,18 @@ const MainBannerCarousel = (props: Props) => {
           <button className="btn btn-accent text-xl">Collection</button>
         </div>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="#slide2" className="btn glass btn-circle">
+          <a
+            href="#slide2"
+            className="btn glass btn-circle"
+            onClick={() => setisBackgroundOn(true)}
+          >
             ❮
           </a>
-          <a href="#slide2" className="btn glass btn-circle">
+          <a
+            href="#slide2"
+            className="btn glass btn-circle"
+            onClick={() => setisBackgroundOn(true)}
+          >
             ❯
           </a>
         </div>
@@ -40,10 +61,18 @@ const MainBannerCarousel = (props: Props) => {
           <button className="btn btn-accent text-xl">Collection</button>
         </div>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="#slide1" className="btn glass btn-circle">
+          <a
+            href="#slide1"
+            className="btn glass btn-circle"
+            onClick={() => setisBackgroundOn(false)}
+          >
             ❮
           </a>
-          <a href="#slide1" className="btn glass btn-circle">
+          <a
+            href="#slide1"
+            className="btn glass btn-circle"
+            onClick={() => setisBackgroundOn(false)}
+          >
             ❯
           </a>
         </div>

@@ -1,3 +1,3 @@
 import { atom } from "jotai";
 
-export const isNavBarFontLight = atom(false);
+export const isNavBackgroundOn = atom(false);

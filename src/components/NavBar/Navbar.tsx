@@ -14,6 +14,8 @@ import { NavLinkType } from "@/shared/types";
 import { useEffect } from "react";
 import XIcon from "../icons/XIcon";
 import AccountTab from "./AccountTab";
+import { useAtom } from "jotai";
+import { isNavBackgroundOn } from "@/shared/global";
 
 type Props = {};
 
@@ -22,6 +24,7 @@ const Navbar = (props: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState(false);
   const [isAccountTabOn, setIsAccountTabOn] = useState(false);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
+  const [isBackgroundOn, setIsBackgroundOn] = useAtom(isNavBackgroundOn);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +41,7 @@ const Navbar = (props: Props) => {
     <nav>
       <div
         className={`w-full text-secondary py-5 px-5 text-xl z-40 fixed top-0 ${
-          !isTopOfPage ? "bg-zinc-100" : "bg-none"
+          !isTopOfPage || isBackgroundOn ? "bg-white" : "bg-none"
         } transition-colors duration-300 ease-in-out`}
       >
         {/* CONTENT */}
@@ -80,7 +83,9 @@ const Navbar = (props: Props) => {
               </div>
               {isAccountTabOn &&
                 isAboveLargeScreen &&
-                window.location.pathname !== "/login" && <AccountTab />}
+                window.location.pathname !== "/login" && (
+                  <AccountTab setIsAccountTabOn={setIsAccountTabOn} />
+                )}
             </div>
             <ShoppingBag />
           </div>
