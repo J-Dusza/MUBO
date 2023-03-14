@@ -22,7 +22,7 @@ const MainBannerCarousel = (props: Props) => {
         <Image
           fill
           alt="TOXIC"
-          src="/toxic.webp"
+          src="/toxic.jpg"
           className="w-full object-cover"
         />
         <ToxicTitle />
