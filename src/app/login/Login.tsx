@@ -18,7 +18,7 @@ const Login = (props: Props) => {
         className="w-1/2"
       />
       <div className="pt-8">
-        <button className="btn btn-wide">sign in</button>
+        <button className="btn btn-wide btn-primary">sign in</button>
       </div>
       <button className="btn btn-outline btn-wide btn-primary gap-8">
         <Google />
