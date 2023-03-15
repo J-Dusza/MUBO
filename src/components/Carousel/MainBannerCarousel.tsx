@@ -3,10 +3,21 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { isNavBackgroundOn } from "@/shared/global";
-type Props = {};
+import EdgeLogo from "./CollectionLogos/EdgeLogo";
+import ToxicLogo from "./CollectionLogos/ToxicLogo";
+import CaliforniaLogo from "./CollectionLogos/CaliforniaLogo";
+import Slide from "./Slide";
 
-const MainBannerCarousel = (props: Props) => {
+export type isBackgroundDark = {
+  slide1: false;
+  slide2: true;
+  slide3: true;
+};
+
+const MainBannerCarousel = () => {
   const [isBackgroundOn, setisBackgroundOn] = useAtom(isNavBackgroundOn);
+
+  const handleNavChange = () => {};
 
   useEffect(() => {
     setisBackgroundOn(false);
@@ -14,18 +25,18 @@ const MainBannerCarousel = (props: Props) => {
     return () => {
       setisBackgroundOn(true);
     };
-  }, []);
+  });
 
   return (
     <div className="carousel w-full">
-      <div id="slide1" className="carousel-item relative w-full h-screen">
+      {/* <div id="slide1" className="carousel-item relative w-full h-screen">
         <Image
           fill
           alt="TOXIC"
-          src="/toxic-banner.jpg"
+          src="/toxic.jpg"
           className="w-full object-cover"
         />
-        <ToxicTitle />
+        <ToxicLogo />
         <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 top-3/4 space-x-7 uppercase text-5xl">
           <button className="btn btn-accent text-xl">Lookbook</button>
           <button className="btn btn-accent text-xl">Collection</button>
@@ -55,7 +66,7 @@ const MainBannerCarousel = (props: Props) => {
           src="/california.jpg"
           className="w-full object-cover"
         />
-        <CaliforniaTitle />
+        <CaliforniaLogo />
         <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 top-3/4 space-x-7 uppercase text-5xl">
           <button className="btn btn-accent text-xl">Lookbook</button>
           <button className="btn btn-accent text-xl">Collection</button>
@@ -69,32 +80,44 @@ const MainBannerCarousel = (props: Props) => {
             ❮
           </a>
           <a
-            href="#slide1"
+            href="#slide3"
             className="btn glass btn-circle"
             onClick={() => setisBackgroundOn(false)}
           >
             ❯
           </a>
         </div>
-      </div>
-    </div>
-  );
-};
-
-const CaliforniaTitle = () => {
-  return (
-    <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 top-1/4 text-7xl md:text-9xl font-lobster">
-      <p className="text-white relative left-[5px] top-[5px]">California</p>
-      <p className="text-rose-600 absolute">California</p>
-    </div>
-  );
-};
-
-const ToxicTitle = () => {
-  return (
-    <div className="absolute flex justify-center transform -translate-y-1/2 left-0 right-0 top-[30%]   text-8xl md:text-9xl font-serif uppercase">
-      <p className="text-black relative left-[5px] top-[5px]">Toxic</p>
-      <p className=" text-green-500 absolute">Toxic</p>
+      </div> */}
+      <Slide
+        id="1"
+        imageUrl="/toxic.jpg"
+        alt="toxic "
+        leftHref="3"
+        rightHref="2"
+        onClick={handleNavChange}
+      >
+        <ToxicLogo />
+      </Slide>
+      <Slide
+        id="2"
+        imageUrl="/california.jpg"
+        alt="california "
+        leftHref="1"
+        rightHref="3"
+        onClick={handleNavChange}
+      >
+        <CaliforniaLogo />
+      </Slide>
+      <Slide
+        id="3"
+        imageUrl="/edge.jpg"
+        alt="edge "
+        leftHref="2"
+        rightHref="1"
+        onClick={handleNavChange}
+      >
+        <EdgeLogo />
+      </Slide>
     </div>
   );
 };

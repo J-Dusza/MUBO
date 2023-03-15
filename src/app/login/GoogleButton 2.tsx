@@ -26,6 +26,7 @@ const GoogleButton = (props: Props) => {
       <button
         className="btn btn-outline btn-wide btn-primary gap-8"
         onClick={logGoogleUser}
+        type="button"
       >
         <Google />
         sign in with google
