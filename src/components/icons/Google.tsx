@@ -2,8 +2,8 @@ const Google = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="25"
-      height="25"
+      width="23"
+      height="23"
       viewBox="0 0 186.69 190.5"
     >
       <g transform="translate(1184.583 765.171)">
