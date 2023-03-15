@@ -1,5 +1,6 @@
 import MainBannerCarousel from "@/components/Carousel/MainBannerCarousel";
 import CenterLinkImageCard from "@/components/Cards/CenterLinkImageCard";
+import GenderCard from "@/components/Cards/GenderCard";
 
 const Home = () => {
   return (
@@ -7,6 +8,9 @@ const Home = () => {
       <MainBannerCarousel />
       <section>
         <div className=""></div>
+        <div>
+          <GenderCard />
+        </div>
         <h2 className="uppercase text-center text-4xl font-extrabold tracking-wider py-16 font-logo">
           shop by category
         </h2>

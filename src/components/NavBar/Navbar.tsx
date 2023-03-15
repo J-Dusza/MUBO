@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import XIcon from "../icons/XIcon";
 import AccountTab from "./AccountTab";
 import { useAtom } from "jotai";
-import { isNavBackgroundOn } from "@/shared/global";
+import { isNavBackgroundOn, isNavWhite } from "@/shared/global";
 
 type Props = {};
 
@@ -22,7 +22,8 @@ const Navbar = (props: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState(false);
   const [isAccountTabOn, setIsAccountTabOn] = useState(false);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
-  const [isBackgroundOn, setIsBackgroundOn] = useAtom(isNavBackgroundOn);
+  const [isBackgroundOn] = useAtom(isNavBackgroundOn);
+  const [isNavTextWhite] = useAtom(isNavWhite);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,7 +37,11 @@ const Navbar = (props: Props) => {
   }, []);
 
   return (
-    <nav>
+    <nav
+      className={`z-40  ${
+        isTopOfPage && isNavTextWhite ? "text-white" : "text-black"
+      }`}
+    >
       <div
         className={`w-full text-secondary py-5 px-5 text-xl z-40 fixed top-0 ${
           !isTopOfPage || isBackgroundOn ? "bg-white" : "bg-none"
@@ -47,7 +52,9 @@ const Navbar = (props: Props) => {
           {/* MOBILE BUTTON */}
           <button
             onClick={() => setIsMenuToggled((state) => !state)}
-            className="lg:hidden p-2 border-[2px] hover:bg-toxic-200 text-black border-black transition-all duration-300 ease-in-out"
+            className={`lg:hidden p-2 border-[2px] hover:bg-toxic-200 transition-all duration-300 ease-in-out ${
+              isTopOfPage && isNavTextWhite ? "border-white" : "border-black"
+            }`}
           >
             <HamburgerIcon />
           </button>
@@ -56,12 +63,32 @@ const Navbar = (props: Props) => {
           {/* LEFT */}
           <div className="flex items-center px-5 space-x-5">
             <Logo />
-            <div className=" space-x-7 uppercase px-5 hidden lg:block text-black font-semibold">
-              <NavLink link="/new" display="new arrivals" />
-              <NavLink link="/collections" display="collections" />
-              <NavLink link="/men" display="men" />
-              <NavLink link="/women" display="women" />
-              <NavLink link="/sale" display="sale" />
+            <div className=" space-x-7 uppercase px-5 hidden lg:block font-semibold">
+              <NavLink
+                link="/new"
+                display="new arrivals"
+                setIsMenuToggled={setIsMenuToggled}
+              />
+              <NavLink
+                link="/collections"
+                display="collections"
+                setIsMenuToggled={setIsMenuToggled}
+              />
+              <NavLink
+                link="/men"
+                display="men"
+                setIsMenuToggled={setIsMenuToggled}
+              />
+              <NavLink
+                link="/women"
+                display="women"
+                setIsMenuToggled={setIsMenuToggled}
+              />
+              <NavLink
+                link="/sale"
+                display="sale"
+                setIsMenuToggled={setIsMenuToggled}
+              />
             </div>
           </div>
           {/* RIGHT */}
@@ -70,7 +97,12 @@ const Navbar = (props: Props) => {
               onMouseEnter={() => setIsAccountTabOn(true)}
               onMouseLeave={() => setIsAccountTabOn(false)}
             >
-              <div onClick={() => setIsAccountTabOn(false)}>
+              {isAccountTabOn &&
+                isAboveLargeScreen &&
+                window.location.pathname !== "/login" && (
+                  <AccountTab setIsAccountTabOn={setIsAccountTabOn} />
+                )}
+              <div className="z-0" onClick={() => setIsAccountTabOn(false)}>
                 <Link href="/login">
                   <User
                     className={`hover:fill-toxic-200 hover:scale-125 ${
@@ -79,11 +111,6 @@ const Navbar = (props: Props) => {
                   />
                 </Link>
               </div>
-              {isAccountTabOn &&
-                isAboveLargeScreen &&
-                window.location.pathname !== "/login" && (
-                  <AccountTab setIsAccountTabOn={setIsAccountTabOn} />
-                )}
             </div>
             <ShoppingBag />
           </div>
@@ -103,11 +130,31 @@ const Navbar = (props: Props) => {
             <XIcon />
           </button>
           <div className=" flex flex-col px-10 items-start text-2xl space-y-2 text-zinc-300">
-            <NavLink link="/new" display="new arrivals" />
-            <NavLink link="/collections" display="collections" />
-            <NavLink link="/men" display="men" />
-            <NavLink link="/women" display="women" />
-            <NavLink link="/sale" display="sale" />
+            <NavLink
+              link="/new"
+              display="new arrivals"
+              setIsMenuToggled={setIsMenuToggled}
+            />
+            <NavLink
+              link="/collections"
+              display="collections"
+              setIsMenuToggled={setIsMenuToggled}
+            />
+            <NavLink
+              link="/men"
+              display="men"
+              setIsMenuToggled={setIsMenuToggled}
+            />
+            <NavLink
+              link="/women"
+              display="women"
+              setIsMenuToggled={setIsMenuToggled}
+            />
+            <NavLink
+              link="/sale"
+              display="sale"
+              setIsMenuToggled={setIsMenuToggled}
+            />
           </div>
         </div>
         <button

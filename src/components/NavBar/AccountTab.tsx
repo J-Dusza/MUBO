@@ -21,7 +21,7 @@ const theme = createTheme({
 const AccountTab = ({ setIsAccountTabOn }: Props) => {
   return (
     <ThemeProvider theme={theme}>
-      <div className="absolute top-12 right-0 w-80 h-[550px]">
+      <div className="absolute top-12 right-0 w-80 h-[550px] z-0 text-black">
         <div className=" relative top-10 h-full w-full bg-zinc-100 shadow-lg flex flex-col items-center">
           <h2 className="font-semibold text-2xl uppercase text-center py-8">
             login

@@ -1,5 +1,8 @@
 "use client";
+import { isNavBackgroundOn, isNavWhite } from "@/shared/global";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
 import Login from "./Login";
 import NavBackgroundSetter from "./NavBackgroundSetter";
 import Register from "./Register";
@@ -18,6 +21,14 @@ const theme = createTheme({
 });
 
 const page = (props: Props) => {
+  const [isBackgroundOn, setisBackgroundOn] = useAtom(isNavBackgroundOn);
+  const [isNavTextWhite, setIsNavTextWhite] = useAtom(isNavWhite);
+
+  useEffect(() => {
+    setisBackgroundOn(true);
+    setIsNavTextWhite(false);
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <NavBackgroundSetter />

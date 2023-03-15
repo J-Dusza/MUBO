@@ -11,11 +11,12 @@ const GoogleButton = (props: Props) => {
   const [showError, setShowError] = useState(false);
 
   const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
     try {
+      const { user } = await signInWithGooglePopup();
       const userDocRef = await createUserDocumentFromAuth(user, {
         newsletter: false,
       });
+      setShowError(false);
     } catch {
       setShowError(true);
     }
@@ -26,6 +27,7 @@ const GoogleButton = (props: Props) => {
       <button
         className="btn btn-outline btn-wide btn-primary gap-8"
         onClick={logGoogleUser}
+        type="button"
       >
         <Google />
         sign in with google

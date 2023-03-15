@@ -143,7 +143,7 @@ const Register = (props: Props) => {
       </h2>
       {}
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col items-center space-y-7  bg-black bg-opacity-50 p-16 backdrop-blur-xl">
+        <div className="flex flex-col items-center space-y-7  bg-black bg-opacity-50 p-16 backdrop-blur-xl max-w-5xl mx-auto">
           {/* TEXT FIELDS */}
           <RegisterInput
             label="E-Mail"
