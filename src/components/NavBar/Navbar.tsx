@@ -3,14 +3,12 @@
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import ShoppingBag from "@/components/icons/ShoppingBag";
 import User from "../icons/User";
 import Logo from "../icons/Logo";
 import { useMediaQuery } from "@mui/material";
 import HamburgerIcon from "../icons/HamburgerIcon";
 import NavLink from "./NavLink";
-import { NavLinkType } from "@/shared/types";
 import { useEffect } from "react";
 import XIcon from "../icons/XIcon";
 import AccountTab from "./AccountTab";

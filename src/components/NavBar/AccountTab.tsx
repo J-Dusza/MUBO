@@ -1,8 +1,7 @@
 import React from "react";
-import Login from "@/app/login/Login";
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
-import Google from "../icons/Google";
 import Link from "next/link";
+import GoogleButton from "@/app/login/GoogleButton";
 
 type Props = {
   setIsAccountTabOn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,10 +36,7 @@ const AccountTab = ({ setIsAccountTabOn }: Props) => {
           <div className="pt-10 pb-4">
             <button className="btn btn-wide">Login</button>
           </div>
-          <button className="btn btn-outline btn-wide btn-primary gap-8">
-            <Google />
-            sign up with google
-          </button>
+          <GoogleButton />
           <p className="uppercase text-center py-5 text-sm">⎯⎯⎯⎯ or ⎯⎯⎯⎯</p>
           <Link href="/login">
             <button
