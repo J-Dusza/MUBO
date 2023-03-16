@@ -8,15 +8,39 @@ import User from "../icons/User";
 import Logo from "../icons/Logo";
 import { useMediaQuery } from "@mui/material";
 import HamburgerIcon from "../icons/HamburgerIcon";
-import NavLink from "./NavLink";
 import { useEffect } from "react";
 import XIcon from "../icons/XIcon";
 import AccountTab from "./AccountTab";
 import { useAtom } from "jotai";
 import { isNavBackgroundOn, isNavWhite } from "@/shared/global";
+import { link } from "fs";
+import { NavLinkType } from "@/shared/types";
+import NavLink from "./NavLink";
 
 type Props = {};
 
+const navLinks: Array<NavLinkType> = [
+  {
+    display: "New Arrivals",
+    href: "/new",
+  },
+  {
+    display: "Collections",
+    href: "/collections",
+  },
+  {
+    display: "Men",
+    href: "/men",
+  },
+  {
+    display: "Women",
+    href: "/women",
+  },
+  {
+    display: "Sale",
+    href: "/sale",
+  },
+];
 const Navbar = (props: Props) => {
   const isAboveLargeScreen = useMediaQuery("(min-width: 1024px)");
   const [isMenuToggled, setIsMenuToggled] = useState(false);
@@ -64,31 +88,15 @@ const Navbar = (props: Props) => {
           <div className="flex items-center px-5 space-x-5">
             <Logo />
             <div className=" space-x-7 uppercase px-5 hidden lg:block font-semibold">
-              <NavLink
-                link="/new"
-                display="new arrivals"
-                setIsMenuToggled={setIsMenuToggled}
-              />
-              <NavLink
-                link="/collections"
-                display="collections"
-                setIsMenuToggled={setIsMenuToggled}
-              />
-              <NavLink
-                link="/men"
-                display="men"
-                setIsMenuToggled={setIsMenuToggled}
-              />
-              <NavLink
-                link="/women"
-                display="women"
-                setIsMenuToggled={setIsMenuToggled}
-              />
-              <NavLink
-                link="/sale"
-                display="sale"
-                setIsMenuToggled={setIsMenuToggled}
-              />
+              {navLinks.map((link, index) => {
+                return (
+                  <NavLink
+                    key={index}
+                    link={link}
+                    setIsMenuToggled={setIsMenuToggled}
+                  />
+                );
+              })}
             </div>
           </div>
           {/* RIGHT */}
@@ -130,31 +138,15 @@ const Navbar = (props: Props) => {
             <XIcon />
           </button>
           <div className=" flex flex-col px-10 items-start text-2xl space-y-2 text-zinc-300">
-            <NavLink
-              link="/new"
-              display="new arrivals"
-              setIsMenuToggled={setIsMenuToggled}
-            />
-            <NavLink
-              link="/collections"
-              display="collections"
-              setIsMenuToggled={setIsMenuToggled}
-            />
-            <NavLink
-              link="/men"
-              display="men"
-              setIsMenuToggled={setIsMenuToggled}
-            />
-            <NavLink
-              link="/women"
-              display="women"
-              setIsMenuToggled={setIsMenuToggled}
-            />
-            <NavLink
-              link="/sale"
-              display="sale"
-              setIsMenuToggled={setIsMenuToggled}
-            />
+            {navLinks.map((link, index) => {
+              return (
+                <NavLink
+                  key={index}
+                  link={link}
+                  setIsMenuToggled={setIsMenuToggled}
+                />
+              );
+            })}
           </div>
         </div>
         <button
