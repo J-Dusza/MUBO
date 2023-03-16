@@ -21,6 +21,11 @@ module.exports = {
         highlight2: "#439775",
         customViolet: "#91A6FF",
       },
+      backgroundImage: {
+        genderpicker: "url('/genderpicker.png')",
+        man: "url('/man.jpg')",
+        woman: "url('/woman.jpg')",
+      },
     },
   },
   plugins: [require("daisyui")],

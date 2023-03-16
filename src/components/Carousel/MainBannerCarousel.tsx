@@ -17,6 +17,12 @@ type Slide = {
 
 const Slides: Array<Slide> = [
   {
+    imageUrl: "/edge.jpg",
+    alt: "Edge Attire",
+    isBackgroundDark: true,
+    children: <EdgeLogo />,
+  },
+  {
     imageUrl: "/toxic.jpg",
     alt: "Toxic",
     isBackgroundDark: false,
@@ -27,12 +33,6 @@ const Slides: Array<Slide> = [
     alt: "California",
     isBackgroundDark: true,
     children: <CaliforniaLogo />,
-  },
-  {
-    imageUrl: "/edge.jpg",
-    alt: "Edge Attire",
-    isBackgroundDark: true,
-    children: <EdgeLogo />,
   },
 ];
 

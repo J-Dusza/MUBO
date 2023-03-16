@@ -22,8 +22,8 @@ const Navbar = (props: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState(false);
   const [isAccountTabOn, setIsAccountTabOn] = useState(false);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
-  const [isBackgroundOn] = useAtom(isNavBackgroundOn);
-  const [isNavTextWhite] = useAtom(isNavWhite);
+  const [isBackgroundOn, setIsBackgroundOn] = useAtom(isNavBackgroundOn);
+  const [isNavTextWhite, setIsNavTextWhite] = useAtom(isNavWhite);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -12,7 +12,7 @@ const EdgeLogo = () => {
         fillRule="evenodd"
         fontSize="9pt"
         stroke="#F6F1F1"
-        strokeWidth="1.0mm"
+        strokeWidth="0.5mm"
         fill="#000"
         // style="stroke:#5899ab;stroke-width:1 0mm;fill:#000"
       >

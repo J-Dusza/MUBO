@@ -1,15 +1,18 @@
-import { isNavBackgroundOn } from "@/shared/global";
+import { isNavBackgroundOn, isNavWhite } from "@/shared/global";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 
 type Props = {};
 
 const NavBackgroundSetter = (props: Props) => {
-  const [isBackgroundOn, setIsBackgroundOn] = useAtom(isNavBackgroundOn);
+  const [isBackgroundOn, setisBackgroundOn] = useAtom(isNavBackgroundOn);
+  const [isNavTextWhite, setIsNavTextWhite] = useAtom(isNavWhite);
 
   useEffect(() => {
-    setIsBackgroundOn(true);
-  }, []);
+    setisBackgroundOn(true);
+    setIsNavTextWhite(false);
+  });
+
   return <div></div>;
 };
 
