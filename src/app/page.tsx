@@ -27,16 +27,19 @@ const Home = () => {
           <CenterLinkImageCard
             className="sm:w-1/3 w-full"
             name="shoes"
+            href="/"
             imgUrl="/shoes.jpg"
           />
           <CenterLinkImageCard
             className="sm:w-1/3 w-full"
             name="clothes"
+            href="/"
             imgUrl="/clothes.jpg"
           />
           <CenterLinkImageCard
             className="sm:w-1/3 w-full"
             name="accessories"
+            href="/"
             imgUrl="/accessories.jpg"
           />
         </div>
