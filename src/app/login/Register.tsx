@@ -77,12 +77,17 @@ const Register = (props: Props) => {
       newErrors.email = "Email is Invalid";
       anErrorOcured = true;
     }
-    const passwordReg = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     if (!password) {
       newErrors.password = "Password field is required";
       anErrorOcured = true;
-    } else if (passwordReg.test(password) === false) {
-      newErrors.password = "Password is too weak";
+    } else if (password.length < 5) {
+      newErrors.password = "Your password must be at least 5 characters";
+      anErrorOcured = true;
+    } else if (password.search(/[a-z]/i) < 0) {
+      newErrors.password = "Your password must contain at least one letter.";
+      anErrorOcured = true;
+    } else if (password.search(/[0-9]/) < 0) {
+      newErrors.password = "Your password must contain at least one digit.";
       anErrorOcured = true;
     } else if (password !== confirmpassword) {
       newErrors.confirmPassword = "Passwords do not match";
