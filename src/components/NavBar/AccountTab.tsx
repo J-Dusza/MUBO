@@ -23,7 +23,7 @@ const AccountTab = ({ setIsAccountTabOn }: Props) => {
     <ThemeProvider theme={theme}>
       <div className="absolute top-12 right-0 w-80 h-[550px] z-0 text-black">
         <div className=" relative top-10 h-full w-full bg-zinc-100 shadow-lg flex flex-col items-center">
-          <h2 className="font-semibold text-2xl uppercase text-center py-8">
+          <h2 className="font-semibold text-2xl uppercase text-center pt-12 pb-5">
             login
           </h2>
           <TextField label="E-Mail" variant="standard" className="w-3/4" />
@@ -31,7 +31,7 @@ const AccountTab = ({ setIsAccountTabOn }: Props) => {
             label="Password"
             variant="standard"
             type="password"
-            className="w-3/4 mt-5"
+            className="w-3/4 mt-6"
           />
           <div className="pt-10 pb-4">
             <button className="btn btn-wide">Login</button>
