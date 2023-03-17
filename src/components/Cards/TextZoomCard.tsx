@@ -15,7 +15,7 @@ const TextZoomCard = ({ imgUrl, className, displayedText }: Props) => {
     >
       <img
         src={imgUrl}
-        className=" object-cover h-full group-hover:scale-110 aspect-video transition-all duration-300 "
+        className=" object-cover h-full group-hover:scale-110 aspect-square transition-all duration-300 "
       />
       <p className="absolute uppercase hover-highlight-left">{displayedText}</p>
     </div>

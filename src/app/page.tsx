@@ -11,7 +11,7 @@ const Home = () => {
         <div className="flex flex-col sm:flex-row space-y-5 sm:space-y-0 sm:space-x-8  mx-auto px-5 sm:px-8 max-w-7xl">
           <TextZoomCard
             imgUrl="/new.jpg"
-            className="w-full sm:w-1/3 aspect-square"
+            className="w-full sm:w-1/3"
             displayedText="new items"
           />
           <GenderCard
