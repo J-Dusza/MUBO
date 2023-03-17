@@ -4,6 +4,12 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "@/utils/firebase/firebase.utils";
+import { useQuery } from "@tanstack/react-query";
+import { RegisterInputSchema } from "@/shared/models";
+import { fromZodError } from "zod-validation-error";
+import { SafeParseReturnType } from "zod";
+import { isObjKey } from "@/utils/typeGuard";
+
 type Props = {};
 
 const defaultFormFields = {
@@ -18,9 +24,9 @@ const defaultFormFields = {
 const defaultErrors = {
   email: "",
   name: "",
-  lastName: "",
+  lastname: "",
   password: "",
-  confirmPassword: "",
+  confirmpassword: "",
   policy: "",
 };
 
@@ -54,53 +60,38 @@ const Register = (props: Props) => {
   };
 
   const validate = () => {
-    let anErrorOcured = false;
-    let newErrors = {
+    const parsedInput = RegisterInputSchema.safeParse({
+      email,
+      name,
+      lastname,
+      password,
+    });
+
+    const newErrors = {
       email: "",
       name: "",
-      lastName: "",
+      lastname: "",
       password: "",
-      confirmPassword: "",
+      confirmpassword: "",
       policy: "",
     };
 
-    if (!name) {
-      newErrors.name = "Name is required";
-      anErrorOcured = true;
-    }
-    if (!lastname) {
-      newErrors.lastName = "Last name is required";
-      anErrorOcured = true;
-    }
-    const emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (!email || emailReg.test(email) === false) {
-      newErrors.email = "Email is Invalid";
-      anErrorOcured = true;
-    }
-    if (!password) {
-      newErrors.password = "Password field is required";
-      anErrorOcured = true;
-    } else if (password.length < 5) {
-      newErrors.password = "Your password must be at least 5 characters";
-      anErrorOcured = true;
-    } else if (password.search(/[a-z]/i) < 0) {
-      newErrors.password = "Your password must contain at least one letter.";
-      anErrorOcured = true;
-    } else if (password.search(/[0-9]/) < 0) {
-      newErrors.password = "Your password must contain at least one digit.";
-      anErrorOcured = true;
-    } else if (password !== confirmpassword) {
-      newErrors.confirmPassword = "Passwords do not match";
-      anErrorOcured = true;
+    if (password !== confirmpassword) {
+      newErrors.confirmpassword = "Passwords do not match";
     }
     if (!policy) {
       newErrors.policy = "*   This field is required   *";
-      anErrorOcured = true;
     }
-    if (anErrorOcured) {
-      setErrors(() => newErrors);
-      return false;
+
+    if (!parsedInput.success) {
+      parsedInput.error.issues.map((error) => {
+        const name = error.path[0];
+        if (isObjKey(name, newErrors)) {
+          newErrors[name] = error.message;
+        }
+      });
     }
+    setErrors(newErrors);
     return true;
   };
 
@@ -173,7 +164,7 @@ const Register = (props: Props) => {
               name="lastname"
               value={lastname}
               onChange={handleChange}
-              error={errors.lastName}
+              error={errors.lastname}
             />
           </div>
           <RegisterInput
@@ -190,7 +181,7 @@ const Register = (props: Props) => {
             name="confirmpassword"
             value={confirmpassword}
             onChange={handleChange}
-            error={errors.confirmPassword}
+            error={errors.confirmpassword}
           />
 
           {/* CHECKBOXES */}

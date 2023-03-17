@@ -9,24 +9,13 @@ import {
   User,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDAvH48eE2vl5N0JMUZtRony4RF75Zl2Mg",
-  authDomain: "muno-clothing.firebaseapp.com",
-  projectId: "muno-clothing",
-  storageBucket: "muno-clothing.appspot.com",
-  messagingSenderId: "953488615110",
-  appId: "1:953488615110:web:cac581bc8e53f51d0b19c7",
-};
-
-const app = initializeApp(firebaseConfig);
+import { auth } from "./config";
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
   prompt: "select_account",
 });
 
-export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();

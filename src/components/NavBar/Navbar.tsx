@@ -89,10 +89,10 @@ const Navbar = (props: Props) => {
             <div className="flex items-center px-5 space-x-5">
               <Logo />
               <div className=" space-x-7 uppercase px-5 hidden lg:block font-semibold">
-                {navLinks.map((link, index) => {
+                {navLinks.map((link) => {
                   return (
                     <NavLink
-                      key={index}
+                      key={link.href}
                       link={link}
                       setIsMenuToggled={setIsMenuToggled}
                     />
@@ -139,10 +139,10 @@ const Navbar = (props: Props) => {
               <XIcon />
             </button>
             <div className=" flex flex-col px-10 items-start text-2xl space-y-2 text-zinc-300">
-              {navLinks.map((link, index) => {
+              {navLinks.map((link) => {
                 return (
                   <NavLink
-                    key={index}
+                    key={link.href}
                     link={link}
                     setIsMenuToggled={setIsMenuToggled}
                   />

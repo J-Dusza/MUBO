@@ -1,15 +1,10 @@
-import {
-  auth,
-  createUserDocumentFromAuth,
-  signInAuthUserWithEmailAndPassword,
-  signInWithGooglePopup,
-} from "@/utils/firebase/firebase.utils";
 import { TextField } from "@mui/material";
-import { type } from "os";
 import React, { useState } from "react";
 import GoogleButton from "./GoogleButton";
-
-type Props = {};
+import { useSignIn } from "@/utils/firebase/useSignIn";
+import { userSessionAtom } from "@/utils/firebase/session";
+import { useAtom } from "jotai";
+import cn from "classnames";
 
 const defaultFormFields = {
   email: "",
@@ -20,11 +15,24 @@ const defaultErrors = {
   password: "",
 };
 
-const Login = (props: Props) => {
+const Login = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [errors, setErrors] = useState(defaultErrors);
-  const { email, password } = formFields;
+  const [userSession] = useAtom(userSessionAtom);
 
+  const { email, password } = formFields;
+  const signInMutation = useSignIn({
+    onError: ({ message }) => {
+      if (message.includes("wrong-password")) {
+        setErrors({ ...defaultErrors, password: "Incorrect password" });
+      } else if (message.includes("user-not-found")) {
+        setErrors({ ...defaultErrors, email: "E-mail was not found" });
+      } else if (message.includes("invalid-email")) {
+        setErrors({ ...defaultErrors, email: "E-mail is incorrect" });
+      }
+      resetFormFields();
+    },
+  });
   const resetFormFields = () => {
     setFormFields({ ...formFields, password: "" });
   };
@@ -36,33 +44,8 @@ const Login = (props: Props) => {
       setErrors({ ...defaultErrors, password: "This field is required" });
     }
     event.preventDefault();
-    try {
-      const response = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
 
-      if (typeof response !== "undefined") {
-        setFormFields(defaultFormFields);
-        setErrors(defaultErrors);
-      }
-    } catch (error) {
-      let message = "Unknown Error";
-      if (error instanceof Error) message = error.message;
-
-      if (message.includes("wrong-password")) {
-        setErrors({ ...defaultErrors, password: "Incorrect password" });
-        resetFormFields();
-      }
-      if (message.includes("user-not-found")) {
-        setErrors({ ...defaultErrors, email: "E-mail was not found" });
-        resetFormFields();
-      }
-      if (message.includes("invalid-email")) {
-        setErrors({ ...defaultErrors, email: "E-mail is incorrect" });
-        resetFormFields();
-      }
-    }
+    signInMutation.mutate({ email, password });
   };
 
   const handleChange = (event: { target: { name: any; value: any } }) => {
@@ -97,7 +80,12 @@ const Login = (props: Props) => {
         helperText={errors.password}
       />
       <div className="pt-8">
-        <button className="btn btn-wide btn-primary" onClick={handleSubmit}>
+        <button
+          className={cn("btn", "btn-wide", "btn-primary", {
+            "loading disabled": signInMutation.isLoading,
+          })}
+          onClick={handleSubmit}
+        >
           sign in
         </button>
       </div>

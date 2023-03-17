@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "@/components/NavBar/Navbar";
+import ClientContext from "@/shared/ClientContext";
 
 export const metadata = {
   title: "MUNO",
@@ -14,8 +15,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <div>{children}</div>
+        <ClientContext>
+          <Navbar />
+          {children}
+        </ClientContext>
       </body>
     </html>
   );
