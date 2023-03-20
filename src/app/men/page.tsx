@@ -5,13 +5,13 @@ import { useGetUsers } from "@/utils/firebase/useGetUsers";
 type Props = {};
 
 const page = (props: Props) => {
-  const usersQuery = useGetUsers();
-  console.log(usersQuery);
+  // const usersQuery = useGetUsers();
+  // console.log(usersQuery);
   return (
     <div>
-      {usersQuery?.data?.map((doc, id) => {
+      {/* {usersQuery?.data?.map((doc, id) => {
         return <div key={id}>{doc["email"]}</div>;
-      })}
+      })} */}
     </div>
   );
 };
