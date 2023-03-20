@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { auth } from "./config";
+import { signOut } from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
@@ -62,3 +63,5 @@ export const signInAuthUserWithEmailAndPassword = async (
 
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+export const signOutUser = () => signOut(auth);

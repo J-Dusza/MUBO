@@ -5,6 +5,7 @@ import { useSignIn } from "@/utils/firebase/useSignIn";
 import { userSessionAtom } from "@/utils/firebase/session";
 import { useAtom } from "jotai";
 import cn from "classnames";
+import LogInButton from "./LogInButton";
 
 const defaultFormFields = {
   email: "",
@@ -21,32 +22,6 @@ const Login = () => {
   const [userSession] = useAtom(userSessionAtom);
 
   const { email, password } = formFields;
-  const signInMutation = useSignIn({
-    onError: ({ message }) => {
-      if (message.includes("wrong-password")) {
-        setErrors({ ...defaultErrors, password: "Incorrect password" });
-      } else if (message.includes("user-not-found")) {
-        setErrors({ ...defaultErrors, email: "E-mail was not found" });
-      } else if (message.includes("invalid-email")) {
-        setErrors({ ...defaultErrors, email: "E-mail is incorrect" });
-      }
-      resetFormFields();
-    },
-  });
-  const resetFormFields = () => {
-    setFormFields({ ...formFields, password: "" });
-  };
-
-  const handleSubmit = async (event: { preventDefault: () => void }) => {
-    if (!email) {
-      setErrors({ ...defaultErrors, email: "This field is required" });
-    } else if (!password) {
-      setErrors({ ...defaultErrors, password: "This field is required" });
-    }
-    event.preventDefault();
-
-    signInMutation.mutate({ email, password });
-  };
 
   const handleChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -80,14 +55,11 @@ const Login = () => {
         helperText={errors.password}
       />
       <div className="pt-8">
-        <button
-          className={cn("btn", "btn-wide", "btn-primary", {
-            "loading disabled": signInMutation.isLoading,
-          })}
-          onClick={handleSubmit}
-        >
-          sign in
-        </button>
+        <LogInButton
+          formFields={formFields}
+          setFormFields={setFormFields}
+          setErrors={setErrors}
+        />
       </div>
       <GoogleButton />
     </form>

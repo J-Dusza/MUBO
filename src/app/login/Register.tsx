@@ -124,7 +124,7 @@ const Register = (props: Props) => {
       let message = "Unknown Error";
       if (error instanceof Error) message = error.message;
 
-      if (message === "auth/email-already-in-use") {
+      if (message.includes("auth/email-already-in-use")) {
         setErrors({ ...errors, email: "E-Mail already in use" });
       } else {
         console.log("An error occured during registration ", message);
@@ -237,6 +237,7 @@ const Register = (props: Props) => {
           <button
             className="btn btn-wide btn-warning btn-outline"
             type="submit"
+            onClick={handleSubmit}
           >
             sign up
           </button>

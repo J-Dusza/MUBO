@@ -16,6 +16,7 @@ import { isNavBackgroundOn, isNavWhite } from "@/shared/global";
 import { link } from "fs";
 import { NavLinkType } from "@/shared/types";
 import NavLink from "./NavLink";
+import LogInTab from "./LogInTab";
 
 type Props = {};
 
@@ -44,7 +45,7 @@ const navLinks: Array<NavLinkType> = [
 const Navbar = (props: Props) => {
   const isAboveLargeScreen = useMediaQuery("(min-width: 1024px)");
   const [isMenuToggled, setIsMenuToggled] = useState(false);
-  const [isAccountTabOn, setIsAccountTabOn] = useState(false);
+  const [isLogInTabOn, setIsLogInTabOn] = useState(false);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
   const [isBackgroundOn, setIsBackgroundOn] = useAtom(isNavBackgroundOn);
   const [isNavTextWhite, setIsNavTextWhite] = useAtom(isNavWhite);
@@ -103,19 +104,19 @@ const Navbar = (props: Props) => {
             {/* RIGHT */}
             <div className="flex space-x-5">
               <div
-                onMouseEnter={() => setIsAccountTabOn(true)}
-                onMouseLeave={() => setIsAccountTabOn(false)}
+                onMouseEnter={() => setIsLogInTabOn(true)}
+                onMouseLeave={() => setIsLogInTabOn(false)}
               >
-                {isAccountTabOn &&
+                {isLogInTabOn &&
                   isAboveLargeScreen &&
                   window.location.pathname !== "/login" && (
-                    <AccountTab setIsAccountTabOn={setIsAccountTabOn} />
+                    <LogInTab setIsLogInTabOn={setIsLogInTabOn} />
                   )}
-                <div className="z-0" onClick={() => setIsAccountTabOn(false)}>
+                <div className="z-0" onClick={() => setIsLogInTabOn(false)}>
                   <Link href="/login">
                     <User
                       className={`hover:fill-toxic-200 hover:scale-125 ${
-                        isAccountTabOn && "fill-toxic-200 scale-125"
+                        isLogInTabOn && "fill-toxic-200 scale-125"
                       }`}
                     />
                   </Link>
