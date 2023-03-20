@@ -55,6 +55,7 @@ const LogInTab = ({ setIsLogInTabOn }: Props) => {
             variant="standard"
             className="w-3/4"
             onChange={handleChange}
+            value={email}
           />
           <TextField
             name="password"
@@ -63,6 +64,7 @@ const LogInTab = ({ setIsLogInTabOn }: Props) => {
             type="password"
             className="w-3/4 mt-6"
             onChange={handleChange}
+            value={password}
           />
           <div className="pt-10 pb-4">
             <LogInButton

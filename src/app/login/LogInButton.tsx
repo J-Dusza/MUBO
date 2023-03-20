@@ -48,6 +48,7 @@ const LogInButton = ({ formFields, setFormFields, setErrors }: Props) => {
   };
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    resetFormFields();
     userSession ? signOutUser() : handleLogIn();
   };
 
