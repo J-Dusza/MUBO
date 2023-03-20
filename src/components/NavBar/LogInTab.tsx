@@ -49,30 +49,32 @@ const LogInTab = ({ setIsLogInTabOn }: Props) => {
             {/* {userSession ? userSession.email : "Login"} */}
             Login
           </h2>
-          <TextField
-            name="email"
-            label="E-Mail"
-            variant="standard"
-            className="w-3/4"
-            onChange={handleChange}
-            value={email}
-          />
-          <TextField
-            name="password"
-            label="Password"
-            variant="standard"
-            type="password"
-            className="w-3/4 mt-6"
-            onChange={handleChange}
-            value={password}
-          />
-          <div className="pt-10 pb-4">
-            <LogInButton
-              formFields={formFields}
-              setFormFields={setFormFields}
-              setErrors={setErrors}
+          <form className="flex flex-col items-center">
+            <TextField
+              name="email"
+              label="E-Mail"
+              variant="standard"
+              className="w-3/4"
+              onChange={handleChange}
+              value={email}
             />
-          </div>
+            <TextField
+              name="password"
+              label="Password"
+              variant="standard"
+              type="password"
+              className="w-3/4 mt-6"
+              onChange={handleChange}
+              value={password}
+            />
+            <div className="pt-10 pb-4">
+              <LogInButton
+                formFields={formFields}
+                setFormFields={setFormFields}
+                setErrors={setErrors}
+              />
+            </div>
+          </form>
           <GoogleButton />
           <p className="uppercase text-center py-5 text-sm">⎯⎯⎯⎯ or ⎯⎯⎯⎯</p>
           <Link href="/login">

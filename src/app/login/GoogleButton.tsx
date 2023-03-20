@@ -17,8 +17,9 @@ const GoogleButton = (props: Props) => {
         newsletter: false,
       });
       setShowError(false);
-    } catch {
+    } catch (error) {
       setShowError(true);
+      console.log(error);
     }
   };
 
