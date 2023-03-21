@@ -1,5 +1,5 @@
-import { TextField } from "@mui/material";
 import { useState } from "react";
+import { TextField } from "@mui/material";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -9,6 +9,7 @@ import { RegisterInputSchema } from "@/shared/models";
 import { fromZodError } from "zod-validation-error";
 import { SafeParseReturnType } from "zod";
 import { isObjKey } from "@/utils/typeGuard";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -30,7 +31,8 @@ const defaultErrors = {
   policy: "",
 };
 
-const Register = (props: Props) => {
+const Register = () => {
+  let router = useRouter();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [errors, setErrors] = useState(defaultErrors);
   const {
@@ -42,6 +44,9 @@ const Register = (props: Props) => {
     policy,
     newsletter,
   } = formFields;
+  function onSuccessRedirect() {
+    router.push("/login/registration-success");
+  }
 
   const handleChange = (event: { target: { name: string; value: string } }) => {
     const { name, value } = event.target;
@@ -60,6 +65,7 @@ const Register = (props: Props) => {
   };
 
   const validate = () => {
+    let hasErrorOccured = false;
     const parsedInput = RegisterInputSchema.safeParse({
       email,
       name,
@@ -78,9 +84,11 @@ const Register = (props: Props) => {
 
     if (password !== confirmpassword) {
       newErrors.confirmpassword = "Passwords do not match";
+      hasErrorOccured = true;
     }
     if (!policy) {
       newErrors.policy = "*   This field is required   *";
+      hasErrorOccured = true;
     }
 
     if (!parsedInput.success) {
@@ -88,10 +96,12 @@ const Register = (props: Props) => {
         const name = error.path[0];
         if (isObjKey(name, newErrors)) {
           newErrors[name] = error.message;
+          if (error.message) hasErrorOccured = true;
         }
       });
     }
     setErrors(newErrors);
+    if (hasErrorOccured) return false;
     return true;
   };
 
@@ -120,6 +130,7 @@ const Register = (props: Props) => {
       };
       await createUserDocumentFromAuth(authUser.user, additionalInfo);
       resetFormFields();
+      onSuccessRedirect();
     } catch (error) {
       let message = "Unknown Error";
       if (error instanceof Error) message = error.message;

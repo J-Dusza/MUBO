@@ -17,6 +17,7 @@ import { link } from "fs";
 import { NavLinkType } from "@/shared/types";
 import NavLink from "./NavLink";
 import LogInTab from "./LogInTab";
+import { userSessionAtom } from "@/utils/firebase/session";
 
 type Props = {};
 
@@ -49,6 +50,7 @@ const Navbar = (props: Props) => {
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
   const [isBackgroundOn, setIsBackgroundOn] = useAtom(isNavBackgroundOn);
   const [isNavTextWhite, setIsNavTextWhite] = useAtom(isNavWhite);
+  const [userSession] = useAtom(userSessionAtom);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -113,7 +115,7 @@ const Navbar = (props: Props) => {
                     <LogInTab setIsLogInTabOn={setIsLogInTabOn} />
                   )}
                 <div className="z-0" onClick={() => setIsLogInTabOn(false)}>
-                  <Link href="/login">
+                  <Link href={userSession ? "/user" : "/login"}>
                     <User
                       className={`hover:fill-toxic-200 hover:scale-125 ${
                         isLogInTabOn && "fill-toxic-200 scale-125"

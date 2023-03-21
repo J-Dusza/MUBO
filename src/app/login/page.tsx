@@ -1,5 +1,6 @@
 "use client";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { useRouter } from "next/router";
 import Login from "./Login";
 import NavBackgroundSetter from "./NavBackgroundSetter";
 import Register from "./Register";

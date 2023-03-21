@@ -44,47 +44,61 @@ const LogInTab = ({ setIsLogInTabOn }: Props) => {
   return (
     <ThemeProvider theme={theme}>
       <div className="absolute top-12 right-0 w-80 h-[550px] z-0 text-black">
-        <div className=" relative top-10 h-full w-full bg-zinc-100 shadow-lg flex flex-col items-center">
-          <h2 className="font-semibold text-2xl uppercase text-center pt-12 pb-5">
-            {/* {userSession ? userSession.email : "Login"} */}
-            Login
-          </h2>
-          <form className="flex flex-col items-center">
-            <TextField
-              name="email"
-              label="E-Mail"
-              variant="standard"
-              className="w-3/4"
-              onChange={handleChange}
-              value={email}
-            />
-            <TextField
-              name="password"
-              label="Password"
-              variant="standard"
-              type="password"
-              className="w-3/4 mt-6"
-              onChange={handleChange}
-              value={password}
-            />
-            <div className="pt-10 pb-4">
+        <div className=" relative top-10 py-12 w-full bg-zinc-100 shadow-lg">
+          {!userSession ? (
+            <div className="flex flex-col items-center">
+              <h2 className="font-semibold text-2xl uppercase text-center pb-5">
+                Login
+              </h2>
+              <form className="flex flex-col items-center space-y-5">
+                <TextField
+                  name="email"
+                  label="E-Mail"
+                  variant="standard"
+                  className="w-3/4"
+                  onChange={handleChange}
+                  value={email}
+                />
+                <TextField
+                  name="password"
+                  label="Password"
+                  variant="standard"
+                  type="password"
+                  className="w-3/4 mt-6"
+                  onChange={handleChange}
+                  value={password}
+                />
+                <div className="pt-10 pb-4">
+                  <LogInButton
+                    formFields={formFields}
+                    setFormFields={setFormFields}
+                    setErrors={setErrors}
+                  />
+                </div>
+              </form>
+              <GoogleButton />
+              <p className="uppercase text-center py-5 text-sm">⎯⎯⎯⎯ or ⎯⎯⎯⎯</p>
+              <Link href="/login">
+                <button
+                  className="btn btn-wide btn-success"
+                  onClick={() => setIsLogInTabOn(false)}
+                >
+                  Create an account
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center">
+              <h2 className="font-semibold text-lg uppercase text-center pb-5">
+                {userSession.email}
+              </h2>
               <LogInButton
                 formFields={formFields}
                 setFormFields={setFormFields}
                 setErrors={setErrors}
               />
             </div>
-          </form>
-          <GoogleButton />
-          <p className="uppercase text-center py-5 text-sm">⎯⎯⎯⎯ or ⎯⎯⎯⎯</p>
-          <Link href="/login">
-            <button
-              className="btn btn-wide btn-success"
-              onClick={() => setIsLogInTabOn(false)}
-            >
-              Create an account
-            </button>
-          </Link>
+          )}
         </div>
       </div>
     </ThemeProvider>
