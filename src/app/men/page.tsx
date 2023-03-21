@@ -7,13 +7,7 @@ type Props = {};
 const page = (props: Props) => {
   // const usersQuery = useGetUsers();
   // console.log(usersQuery);
-  return (
-    <div>
-      {/* {usersQuery?.data?.map((doc, id) => {
-        return <div key={id}>{doc["email"]}</div>;
-      })} */}
-    </div>
-  );
+  return <div></div>;
 };
 
 export default page;

@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDAvH48eE2vl5N0JMUZtRony4RF75Zl2Mg",
-  authDomain: "muno-clothing.firebaseapp.com",
+  authDomain: "muno.jandusza.com",
   projectId: "muno-clothing",
   storageBucket: "muno-clothing.appspot.com",
   messagingSenderId: "953488615110",
