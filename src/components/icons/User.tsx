@@ -9,7 +9,7 @@ const User = ({ className }: Props) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={`w-7 transition-all ease-in-out duration-150 ${className}`}
+    className={`w-8 transition-all ease-in-out duration-150 ${className}`}
   >
     <path
       strokeLinecap="round"

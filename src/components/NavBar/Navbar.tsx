@@ -49,10 +49,11 @@ const navLinks: Array<NavLinkType> = [
 ];
 const Navbar = (props: Props) => {
   const isAboveLargeScreen = useMediaQuery("(min-width: 1024px)");
+  const isAboveSmallScreen = useMediaQuery("(min-width: 640px)");
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const [dropdownState, setDropdownState] = useState<null | dropdownType>(null);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
-  const [cartQuantity, setCartQuantity] = useState(990);
+  const [cartQuantity, setCartQuantity] = useState(100);
   const [isBackgroundOn, setIsBackgroundOn] = useAtom(isNavBackgroundOn);
   const [isNavTextWhite, setIsNavTextWhite] = useAtom(isNavWhite);
   const [userSession] = useAtom(userSessionAtom);
@@ -115,7 +116,7 @@ const Navbar = (props: Props) => {
                 onMouseLeave={() => setDropdownState(null)}
               >
                 {dropdownState === "login" &&
-                  isAboveLargeScreen &&
+                  isAboveSmallScreen &&
                   window.location.pathname !== "/login" && (
                     <LogInTab setDropdown={setDropdownState} />
                   )}

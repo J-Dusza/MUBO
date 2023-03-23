@@ -8,10 +8,10 @@ const ShoppingBagWidget = ({ quantity }: Props) => {
   return (
     <div className="group hover:scale-125 transition-all ease-in-out duration-150">
       <ShoppingBag />
-      <div className="relative left-[6px] bottom-[17.5px]">
+      <div className="relative left-[25%] bottom-[65%]">
         <p
-          className={`text-xs text-center absolute w-4 ${
-            quantity > 99 && "text-[0.6rem]"
+          className={`text-sm text-center absolute w-4 ${
+            quantity > 99 && "text-[11px]"
           }`}
         >
           {quantity > 99 ? "99+" : quantity}
