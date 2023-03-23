@@ -18,8 +18,12 @@ import { NavLinkType } from "@/shared/types";
 import NavLink from "./NavLink";
 import LogInTab from "./LogInTab";
 import { userSessionAtom } from "@/utils/firebase/session";
+import ShoppingBagWidget from "./ShoppingBagWidget";
+import z from "zod";
 
 type Props = {};
+
+export type dropdownType = "login" | "cart";
 
 const navLinks: Array<NavLinkType> = [
   {
@@ -45,9 +49,10 @@ const navLinks: Array<NavLinkType> = [
 ];
 const Navbar = (props: Props) => {
   const isAboveLargeScreen = useMediaQuery("(min-width: 1024px)");
-  const [isMenuToggled, setIsMenuToggled] = useState(false);
-  const [isLogInTabOn, setIsLogInTabOn] = useState(false);
+  const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
+  const [dropdownState, setDropdownState] = useState<null | dropdownType>(null);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
+  const [cartQuantity, setCartQuantity] = useState(990);
   const [isBackgroundOn, setIsBackgroundOn] = useAtom(isNavBackgroundOn);
   const [isNavTextWhite, setIsNavTextWhite] = useAtom(isNavWhite);
   const [userSession] = useAtom(userSessionAtom);
@@ -79,7 +84,7 @@ const Navbar = (props: Props) => {
           <div className="flex justify-between items-center">
             {/* MOBILE BUTTON */}
             <button
-              onClick={() => setIsMenuToggled((state) => !state)}
+              onClick={() => setIsMobileMenuToggled((state) => !state)}
               className={`lg:hidden p-2 border-[2px] hover:bg-toxic-200 transition-all duration-300 ease-in-out ${
                 isTopOfPage && isNavTextWhite ? "border-white" : "border-black"
               }`}
@@ -97,7 +102,7 @@ const Navbar = (props: Props) => {
                     <NavLink
                       key={link.href}
                       link={link}
-                      setIsMenuToggled={setIsMenuToggled}
+                      setIsMenuToggled={setIsMobileMenuToggled}
                     />
                   );
                 })}
@@ -106,25 +111,25 @@ const Navbar = (props: Props) => {
             {/* RIGHT */}
             <div className="flex space-x-5">
               <div
-                onMouseEnter={() => setIsLogInTabOn(true)}
-                onMouseLeave={() => setIsLogInTabOn(false)}
+                onMouseEnter={() => setDropdownState("login")}
+                onMouseLeave={() => setDropdownState(null)}
               >
-                {isLogInTabOn &&
+                {dropdownState === "login" &&
                   isAboveLargeScreen &&
                   window.location.pathname !== "/login" && (
-                    <LogInTab setIsLogInTabOn={setIsLogInTabOn} />
+                    <LogInTab setDropdown={setDropdownState} />
                   )}
-                <div className="z-0" onClick={() => setIsLogInTabOn(false)}>
+                <div className="z-0" onClick={() => setDropdownState(null)}>
                   <Link href={userSession ? "/user" : "/login"}>
                     <User
                       className={`hover:fill-toxic-200 hover:scale-125 ${
-                        isLogInTabOn && "fill-toxic-200 scale-125"
+                        dropdownState === "login" && "fill-toxic-200 scale-125"
                       }`}
                     />
                   </Link>
                 </div>
               </div>
-              <ShoppingBag />
+              <ShoppingBagWidget quantity={cartQuantity} />
             </div>
           </div>
         </div>
@@ -132,11 +137,11 @@ const Navbar = (props: Props) => {
         <div>
           <div
             className={` w-3/4 h-full fixed left-0 top-0 bg-black z-50 flex flex-col text-highlight font-bold transition duration-500 ease-out ${
-              isMenuToggled ? "translate-x-0" : "-translate-x-full"
+              isMobileMenuToggled ? "translate-x-0" : "-translate-x-full"
             }`}
           >
             <button
-              onClick={() => setIsMenuToggled((state) => !state)}
+              onClick={() => setIsMobileMenuToggled((state) => !state)}
               className="m-7 self-end text-zinc-300"
             >
               <XIcon />
@@ -147,16 +152,16 @@ const Navbar = (props: Props) => {
                   <NavLink
                     key={link.href}
                     link={link}
-                    setIsMenuToggled={setIsMenuToggled}
+                    setIsMenuToggled={setIsMobileMenuToggled}
                   />
                 );
               })}
             </div>
           </div>
           <button
-            onClick={() => setIsMenuToggled((state) => !state)}
+            onClick={() => setIsMobileMenuToggled((state) => !state)}
             className={`absolute top-0 w-screen h-screen z-40 bg-gray-900 transition-all duration-300 ${
-              isMenuToggled ? "opacity-50" : "opacity-0 hidden"
+              isMobileMenuToggled ? "opacity-50" : "opacity-0 hidden"
             }`}
           ></button>
         </div>

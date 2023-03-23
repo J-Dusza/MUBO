@@ -6,6 +6,7 @@ import { userSessionAtom } from "@/utils/firebase/session";
 import { useSignIn } from "@/utils/firebase/useSignIn";
 import { useAtom } from "jotai";
 import LogInButton from "@/app/login/LogInButton";
+import { dropdownType } from "./Navbar";
 
 const defaultFormFields = {
   email: "",
@@ -17,7 +18,7 @@ const defaultErrors = {
 };
 
 type Props = {
-  setIsLogInTabOn: React.Dispatch<React.SetStateAction<boolean>>;
+  setDropdown: React.Dispatch<React.SetStateAction<dropdownType | null>>;
 };
 
 const theme = createTheme({
@@ -31,7 +32,7 @@ const theme = createTheme({
   },
 });
 
-const LogInTab = ({ setIsLogInTabOn }: Props) => {
+const LogInTab = ({ setDropdown }: Props) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [errors, setErrors] = useState(defaultErrors);
   const { email, password } = formFields;
@@ -81,7 +82,7 @@ const LogInTab = ({ setIsLogInTabOn }: Props) => {
               <Link href="/login">
                 <button
                   className="btn btn-wide btn-success"
-                  onClick={() => setIsLogInTabOn(false)}
+                  onClick={() => setDropdown(null)}
                 >
                   Create an account
                 </button>
