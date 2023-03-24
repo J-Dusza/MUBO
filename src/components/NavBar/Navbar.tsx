@@ -4,7 +4,7 @@ import React from "react";
 import { useState } from "react";
 import Link from "next/link";
 import ShoppingBag from "@/components/icons/ShoppingBag";
-import User from "../icons/User";
+import User from "../icons/UserIcon";
 import Logo from "../icons/Logo";
 import { useMediaQuery } from "@mui/material";
 import HamburgerIcon from "../icons/HamburgerIcon";
@@ -16,10 +16,12 @@ import { isNavBackgroundOn, isNavWhite } from "@/shared/global";
 import { link } from "fs";
 import { NavLinkType } from "@/shared/types";
 import NavLink from "./NavLink";
-import LogInTab from "./LogInTab";
 import { userSessionAtom } from "@/utils/firebase/session";
-import ShoppingBagWidget from "./ShoppingBagWidget";
+import ShoppingBagWidget from "./Cart/ShoppingBagWidget";
 import z from "zod";
+import CartTab from "./Cart/CartTab";
+import Cart from "./Cart";
+import Login from "./Login";
 
 type Props = {};
 
@@ -53,7 +55,7 @@ const Navbar = (props: Props) => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const [dropdownState, setDropdownState] = useState<null | dropdownType>(null);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
-  const [cartQuantity, setCartQuantity] = useState(100);
+  const [cartQuantity, setCartQuantity] = useState(5);
   const [isBackgroundOn, setIsBackgroundOn] = useAtom(isNavBackgroundOn);
   const [isNavTextWhite, setIsNavTextWhite] = useAtom(isNavWhite);
   const [userSession] = useAtom(userSessionAtom);
@@ -111,26 +113,20 @@ const Navbar = (props: Props) => {
             </div>
             {/* RIGHT */}
             <div className="flex space-x-5">
-              <div
-                onMouseEnter={() => setDropdownState("login")}
-                onMouseLeave={() => setDropdownState(null)}
-              >
-                {dropdownState === "login" &&
-                  isAboveSmallScreen &&
-                  window.location.pathname !== "/login" && (
-                    <LogInTab setDropdown={setDropdownState} />
-                  )}
-                <div className="z-0" onClick={() => setDropdownState(null)}>
-                  <Link href={userSession ? "/user" : "/login"}>
-                    <User
-                      className={`hover:fill-toxic-200 hover:scale-125 ${
-                        dropdownState === "login" && "fill-toxic-200 scale-125"
-                      }`}
-                    />
-                  </Link>
-                </div>
-              </div>
-              <ShoppingBagWidget quantity={cartQuantity} />
+              {/* LOGIN TAB */}
+              <Login
+                dropdownState={dropdownState}
+                setDropdownState={setDropdownState}
+                isAboveSmallScreen={isAboveSmallScreen}
+                userSession={userSession}
+              />
+              {/* CART TAB */}
+              <Cart
+                dropdownState={dropdownState}
+                setDropdownState={setDropdownState}
+                cartQuantity={cartQuantity}
+                isAboveSmallScreen={isAboveSmallScreen}
+              />
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ const ShoppingBag = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="w-8 group-hover:fill-toxic-200 transition-all ease-in-out duration-150"
+    className="w-[2.1rem] group-hover:fill-toxic-200 transition-all ease-in-out duration-150"
   >
     <path
       strokeLinecap="round"

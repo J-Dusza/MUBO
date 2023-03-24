@@ -3,32 +3,38 @@ import { useAtom } from "jotai";
 import Link from "next/link";
 import React, { useState } from "react";
 import { boolean } from "zod";
-import User from "../icons/User";
+import User from "../../icons/UserIcon";
+import { dropdownType } from "../Navbar";
 import LogInTab from "./LogInTab";
 
 type Props = {
+  dropdownState: dropdownType | null;
+  setDropdownState: React.Dispatch<React.SetStateAction<dropdownType | null>>;
   isAboveLargeScreen: boolean;
 };
 
-const LogInIcon = ({ isAboveLargeScreen }: Props) => {
-  const [isLogInTabOn, setIsLogInTabOn] = useState(false);
+const LogInIcon = ({
+  isAboveLargeScreen,
+  setDropdownState,
+  dropdownState,
+}: Props) => {
   const [userSession] = useAtom(userSessionAtom);
 
   return (
     <div
-      onMouseEnter={() => setIsLogInTabOn(true)}
-      onMouseLeave={() => setIsLogInTabOn(false)}
+      onMouseEnter={() => setDropdownState("login")}
+      onMouseLeave={() => setDropdownState(null)}
     >
-      {isLogInTabOn &&
+      {dropdownState === "login" &&
         isAboveLargeScreen &&
         window.location.pathname !== "/login" && (
-          <LogInTab setIsLogInTabOn={setIsLogInTabOn} />
+          <LogInTab setDropdown={setDropdownState} />
         )}
-      <div className="z-0" onClick={() => setIsLogInTabOn(false)}>
+      <div className="z-0" onClick={() => setDropdownState(null)}>
         <Link href="/login">
           <User
             className={`hover:fill-toxic-200 hover:scale-125 ${
-              isLogInTabOn && "fill-toxic-200 scale-125"
+              dropdownState === "login" && "fill-toxic-200 scale-125"
             }`}
           />
         </Link>

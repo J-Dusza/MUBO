@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./config";
 import { FirebaseError } from "firebase/app";
-import User from "@/components/icons/User";
+import User from "@/components/icons/UserIcon";
 import { userSessionAtom } from "./session";
 import { useAtom } from "jotai";
 
