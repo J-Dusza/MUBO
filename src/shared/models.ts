@@ -25,3 +25,24 @@ export const RegisterPasswordSchema = z
   .regex(/[0-9]+/i, "Password must contain at least one digit")
   .regex(/[A-Za-z]+/i, "Password must contain at least one letter")
   .min(5, "Your password must be at least 5 characters");
+
+export const SlideSchema = z.object({
+  _createdAt: z.string(),
+  _id: z.string(),
+  _rev: z.string(),
+  _type: z.string(),
+  _updatedAt: z.string(),
+  background: z.object({
+    _type: z.string(),
+    asset: z.object({ _ref: z.string(), _type: z.string() }),
+  }),
+  links: z.array(
+    z.object({ _key: z.string(), _type: z.string(), name: z.string() })
+  ),
+  logo: z.object({
+    _type: z.string(),
+    asset: z.object({ _ref: z.string(), _type: z.string() }),
+  }),
+  name: z.string(),
+  navColor: z.string(),
+});

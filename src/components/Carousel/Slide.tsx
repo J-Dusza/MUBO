@@ -1,3 +1,4 @@
+import { height } from "@mui/system";
 import { SetStateAction } from "jotai";
 import Image from "next/image";
 
@@ -5,17 +6,19 @@ type SlideProps = {
   id: number;
   maxId: number;
   children: React.ReactNode;
-  imageUrl: string;
+  backgroundUrl: string;
+  logoUrl: string;
   alt: string;
-  isBackgroundDark: boolean;
+  navColor: string;
   onClick: (id: number) => void;
 };
 
 const Slide = ({
   id,
-  imageUrl,
+  backgroundUrl,
+  logoUrl,
   alt,
-  isBackgroundDark,
+  navColor,
   children,
   maxId,
   onClick,
@@ -28,15 +31,20 @@ const Slide = ({
   if (id !== maxId) {
     rightId = id + 1;
   }
-
   const leftHref = `#slide${leftId}`;
   const rightHref = `#slide${rightId}`;
 
   return (
     <div id={`slide${id}`} className="carousel-item relative w-full h-screen">
-      <Image fill alt={alt} src={imageUrl} className="w-full object-cover" />
-      <div className="absolute flex justify-center transform -translate-y-1/2 left-0 right-0 top-[30%]   text-8xl md:text-9xl px-10">
-        {children}
+      <Image
+        priority
+        fill
+        alt={alt}
+        src={backgroundUrl}
+        className="w-full object-cover"
+      />
+      <div className="absolute flex justify-center items-center transform -translate-y-1/2 left-0 right-0 top-[30%] w-3/4 h-3/4 md:w-1/2 md:h-1/2 lg:w-1/3 lg:h-1/3 m-auto px-10">
+        <Image priority fill alt={alt} src={logoUrl} />
       </div>
       <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 top-3/4 space-x-7 uppercase text-5xl">
         <button className="btn btn-accent text-xl">Lookbook</button>
