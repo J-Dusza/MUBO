@@ -1,21 +1,19 @@
-"use client";
-import { db } from "@/utils/firebase/firebase.utils";
-import { useGetProducts } from "@/utils/sanity/useGetProducts";
-import { useGetUsers } from "@/utils/firebase/useGetUsers";
-import { useQuery } from "@tanstack/react-query";
-import { collection, getDocs, query } from "firebase/firestore";
-import { useState } from "react";
+import Products from "./Products";
 
 type Props = {};
 
 const page = (props: Props) => {
-  // const products = useGetProducts("*[_type==product]");
-  // console.log(products);
   return (
-    <div>
-      {/* {products?.map((product, id) => {
-        return <div key={i}>{product.name}</div>;
-      })} */}
+    <div className="relative top-[90px]">
+      <div className="flex justify-between">
+        <div></div>
+        <div className="w-9/12">
+          <Products
+            queryKey={["newProducts"]}
+            query='*[_type == "product" && dateTime(_createdAt) > dateTime(now()) - 60*60*24*7 ] | order(_createdAt desc)'
+          />
+        </div>
+      </div>
     </div>
   );
 };

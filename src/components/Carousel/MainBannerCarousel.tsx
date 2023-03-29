@@ -10,7 +10,7 @@ import Slide from "./Slide";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "@/utils/sanity/sanityClient";
 import { SlideSchema } from "@/shared/models";
-import imageUrlBuilder from "@sanity/image-url";
+import { urlFor } from "@/utils/sanity/urlFor";
 
 type Slide = {
   imageUrl: string;
@@ -44,18 +44,12 @@ const MainBannerCarousel = () => {
   const [, setisBackgroundOn] = useAtom(isNavBackgroundOn);
   const [, setIsNavTextWhite] = useAtom(isNavWhite);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const builder = imageUrlBuilder(client);
   const { data, isSuccess } = useQuery({
     queryKey: ["slides"],
     queryFn: async () => {
       return await client.fetch('*[_type == "slide"] | order(order)');
     },
-    onSuccess: (data) => {
-      console.log(data);
-    },
   });
-
-  const urlFor = (source: any) => builder.image(source.asset._ref);
 
   const handleNavChange = (id: number) => {
     setCurrentSlide(id);
