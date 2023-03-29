@@ -85,7 +85,7 @@ const MainBannerCarousel = () => {
             key={slide._id}
             id={idx}
             maxId={data.length - 1}
-            backgroundUrl={urlFor(slide.background).url()}
+            backgroundUrl={urlFor(slide.background).width(1800).url()}
             logoUrl={urlFor(slide.logo).url()}
             alt={slide.name}
             navColor={slide.navColor}
