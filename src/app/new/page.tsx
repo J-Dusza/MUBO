@@ -9,8 +9,8 @@ import { useState } from "react";
 type Props = {};
 
 const page = (props: Props) => {
-  const products = useGetProducts("*[_type==product]");
-  console.log(products);
+  // const products = useGetProducts("*[_type==product]");
+  // console.log(products);
   return (
     <div>
       {/* {products?.map((product, id) => {

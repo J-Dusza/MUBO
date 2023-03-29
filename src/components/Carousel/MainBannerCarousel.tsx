@@ -71,7 +71,7 @@ const MainBannerCarousel = () => {
       setIsNavTextWhite(false);
       setisBackgroundOn(true);
     };
-  }, []);
+  });
 
   useEffect(() => {
     isSuccess && setIsNavTextWhite(data[currentSlide].navColor == "white");
