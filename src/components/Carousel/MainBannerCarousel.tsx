@@ -14,6 +14,8 @@ import { urlFor } from "@/utils/sanity/urlFor";
 import { motion } from "framer-motion";
 import { Hidden } from "@mui/material";
 import react from "react";
+import Logo from "../icons/Logo";
+import { Opacity } from "@mui/icons-material";
 
 type Slide = {
   imageUrl: string;
@@ -22,42 +24,20 @@ type Slide = {
   children: React.ReactNode;
 };
 
-const Slides: Array<Slide> = [
-  {
-    imageUrl: "/california.jpg",
-    alt: "California",
-    isBackgroundDark: true,
-    children: <CaliforniaLogo />,
-  },
-  {
-    imageUrl: "/edge.jpg",
-    alt: "Edge Attire",
-    isBackgroundDark: true,
-    children: <EdgeLogo />,
-  },
-  {
-    imageUrl: "/toxic.jpg",
-    alt: "Toxic",
-    isBackgroundDark: false,
-    children: <ToxicLogo />,
-  },
-];
+const show = {
+  opacity: 1,
+  display: "flex",
+};
 
-const variants = {
-  hidden: {
-    opacity: 0,
-    onanimationend: {
-      display: "none",
-    },
-  },
-  shown: {
-    opacity: 1,
-    display: "block",
+const hide = {
+  opacity: 0,
+  transitionEnd: {
+    display: "none",
   },
 };
 
 const MainBannerCarousel = () => {
-  const [variant, setVariant] = useState("shown");
+  const [isLoading, setIsLoading] = useState(true);
   const [, setisBackgroundOn] = useAtom(isNavBackgroundOn);
   const [, setIsNavTextWhite] = useAtom(isNavWhite);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -66,6 +46,7 @@ const MainBannerCarousel = () => {
     queryFn: async () => {
       return await client.fetch('*[_type == "slide"] | order(order)');
     },
+    onSuccess: () => setIsLoading(false),
   });
 
   const handleNavChange = (id: number) => {
@@ -75,7 +56,6 @@ const MainBannerCarousel = () => {
   useEffect(() => {
     if (isSuccess) {
       setIsNavTextWhite(data[currentSlide].navColor == "white");
-      setVariant("hidden");
     } else {
       setIsNavTextWhite(true);
     }
@@ -94,11 +74,12 @@ const MainBannerCarousel = () => {
   return (
     <>
       <motion.div
-        variants={variants}
-        initial="shown"
-        animate={variant}
-        className={`absolute z-50 bg-white h-screen w-screen transition-all duration-700`}
-      ></motion.div>
+        animate={isLoading ? show : hide}
+        className={`
+         fixed z-50 flex justify-center items-center  bg-white h-screen w-screen transition-all duration-700`}
+      >
+        <Logo />
+      </motion.div>
       <div className="carousel w-full">
         {isSuccess &&
           data.map((slide: any, idx: number) => (
