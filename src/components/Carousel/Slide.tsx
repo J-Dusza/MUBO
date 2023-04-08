@@ -48,10 +48,8 @@ const Slide = ({
       </div>
       <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 top-3/4 space-x-7 uppercase text-5xl">
         {links.map((button: any) => (
-          <Link href={button.pageUrl ? button.pageUrl : ""}>
-            <button key={button._key} className="btn btn-accent text-xl">
-              {button.name}
-            </button>
+          <Link key={button._key} href={button.pageUrl ? button.pageUrl : ""}>
+            <button className="btn btn-accent text-xl">{button.name}</button>
           </Link>
         ))}
       </div>
