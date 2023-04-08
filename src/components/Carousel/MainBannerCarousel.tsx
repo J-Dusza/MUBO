@@ -11,6 +11,9 @@ import { useQuery } from "@tanstack/react-query";
 import { client } from "@/utils/sanity/sanityClient";
 import { SlideSchema } from "@/shared/models";
 import { urlFor } from "@/utils/sanity/urlFor";
+import { motion } from "framer-motion";
+import { Hidden } from "@mui/material";
+import react from "react";
 
 type Slide = {
   imageUrl: string;
@@ -40,7 +43,23 @@ const Slides: Array<Slide> = [
   },
 ];
 
+const variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0,
+    onanimationend: {
+      display: "none",
+    },
+  },
+  shown: {
+    opacity: 1,
+    scale: 1,
+    display: "block",
+  },
+};
+
 const MainBannerCarousel = () => {
+  const [variant, setVariant] = useState("shown");
   const [, setisBackgroundOn] = useAtom(isNavBackgroundOn);
   const [, setIsNavTextWhite] = useAtom(isNavWhite);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -56,9 +75,12 @@ const MainBannerCarousel = () => {
   };
 
   useEffect(() => {
-    isSuccess
-      ? setIsNavTextWhite(data[currentSlide].navColor == "white")
-      : setIsNavTextWhite(true);
+    if (isSuccess) {
+      setIsNavTextWhite(data[currentSlide].navColor == "white");
+      setVariant("hidden");
+    } else {
+      setIsNavTextWhite(true);
+    }
     setisBackgroundOn(false);
 
     return () => {
@@ -72,26 +94,30 @@ const MainBannerCarousel = () => {
   }, [currentSlide]);
 
   return (
-    <div className="carousel w-full">
-      {isSuccess ? (
-        data.map((slide: any, idx: number) => (
-          <Slide
-            key={slide._id}
-            id={idx}
-            maxId={data.length - 1}
-            backgroundUrl={urlFor(slide.background).width(1800).url()}
-            logoUrl={urlFor(slide.logo).url()}
-            alt={slide.name}
-            navColor={slide.navColor}
-            onClick={handleNavChange}
-          >
-            {}
-          </Slide>
-        ))
-      ) : (
-        <div className="h-screen w-full"></div>
-      )}
-    </div>
+    <>
+      <motion.div
+        variants={variants}
+        initial="shown"
+        animate={variant}
+        className={`absolute z-50 bg-white h-screen w-screen transition-all duration-700`}
+      ></motion.div>
+      <div className="carousel w-full">
+        {isSuccess &&
+          data.map((slide: any, idx: number) => (
+            <Slide
+              key={slide._id}
+              id={idx}
+              maxId={data.length - 1}
+              backgroundUrl={urlFor(slide.background).width(1800).url()}
+              logoUrl={urlFor(slide.logo).url()}
+              alt={slide.name}
+              links={slide.links}
+              navColor={slide.navColor}
+              onClick={handleNavChange}
+            ></Slide>
+          ))}
+      </div>
+    </>
   );
 };
 

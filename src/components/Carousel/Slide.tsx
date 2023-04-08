@@ -1,15 +1,16 @@
 import { height } from "@mui/system";
 import { SetStateAction } from "jotai";
 import Image from "next/image";
+import Link from "next/link";
 
 type SlideProps = {
   id: number;
   maxId: number;
-  children: React.ReactNode;
   backgroundUrl: string;
   logoUrl: string;
   alt: string;
   navColor: string;
+  links: Array<any>;
   onClick: (id: number) => void;
 };
 
@@ -19,7 +20,7 @@ const Slide = ({
   logoUrl,
   alt,
   navColor,
-  children,
+  links,
   maxId,
   onClick,
 }: SlideProps) => {
@@ -33,7 +34,6 @@ const Slide = ({
   }
   const leftHref = `#slide${leftId}`;
   const rightHref = `#slide${rightId}`;
-
   return (
     <div id={`slide${id}`} className="carousel-item relative w-full h-screen">
       <Image
@@ -47,8 +47,13 @@ const Slide = ({
         <Image priority fill alt={alt} src={logoUrl} />
       </div>
       <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 top-3/4 space-x-7 uppercase text-5xl">
-        <button className="btn btn-accent text-xl">Lookbook</button>
-        <button className="btn btn-accent text-xl">Collection</button>
+        {links.map((button: any) => (
+          <Link href={button.pageUrl ? button.pageUrl : ""}>
+            <button key={button._key} className="btn btn-accent text-xl">
+              {button.name}
+            </button>
+          </Link>
+        ))}
       </div>
       <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
         <a

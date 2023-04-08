@@ -15,18 +15,16 @@ const Products = ({ name, price, imageUrl1, imageUrl2, view }: Props) => {
   return (
     <Link href={""}>
       <div
-        className={`aspect-[75/100] group ${
-          view === 4 ? "w-[18vw]" : "w-[32vw]"
-        }`}
+        className={`aspect-[85/100] p-2 group m-auto w-80%`}
         onMouseEnter={() => setImageUrl(imageUrl2)}
         onMouseLeave={() => setImageUrl(imageUrl1)}
       >
         <Image
-          width={200}
-          height={100}
+          width={500}
+          height={500}
           alt={name}
           src={imageUrl}
-          className="w-full h-full object-cover "
+          className="w-full h-full object-cover"
         />
         <div className="px-2 py-1 space-y-1">
           <p className="text-base group-hover:text-primary transition-colors duration-150">
